@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enjoy - Cyberpunk Movie Ratings</title>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="cyber-container">
+      <!-- Header -->
+      <header class="cyber-header">
+        <h1 class="cyber-glitch" data-text="Movie Truth">Movie Truth</h1>
+        <p class="cyber-subtitle">USER-GENERATED MOVIE DATABASE</p>
+        <a href="quotes.html" class="cyber-button-small" style="margin: 10px"
+          >[ VIEW QUOTES ]</a
+        >
+      </header>
+
+      <!-- Navigation Tabs -->
+      <div class="cyber-tabs">
+        <button class="cyber-tab active" data-tab="add-movie">
+          [ ADD NEW ENTRY ]
+        </button>
+        <button class="cyber-tab" data-tab="search-movies">
+          [ SEARCH ARCHIVES ]
+        </button>
+      </div>
+
+      <!-- Add Movie Tab -->
+      <div id="add-movie" class="cyber-tab-content active">
+        <form id="movieForm" class="cyber-form">
+          <div class="cyber-input-group">
+            <label class="cyber-label">MOVIE TITLE</label>
+            <input
+              id="title"
+              type="text"
+              class="cyber-input"
+              placeholder="Enter movie title..."
+              required
+            />
+            <div class="cyber-bar"></div>
+          </div>
+
+          <div class="cyber-input-group">
+            <label class="cyber-label">RELEASE YEAR</label>
+            <select id="year" class="cyber-select" required>
+              <option value="">Select year</option>
+            </select>
+            <div class="cyber-bar"></div>
+          </div>
+
+          <div class="cyber-input-group">
+            <label class="cyber-label">GENRE</label>
+            <select id="genre" class="cyber-select" required>
+              <option value="">Select genre</option>
+            </select>
+            <div class="cyber-bar"></div>
+          </div>
+
+          <div class="cyber-rating">
+            <label class="cyber-label">YOUR RATING</label>
+            <div class="cyber-stars">
+              <span class="cyber-star" data-value="1">★</span>
+              <span class="cyber-star" data-value="2">★</span>
+              <span class="cyber-star" data-value="3">★</span>
+              <span class="cyber-star" data-value="4">★</span>
+              <span class="cyber-star" data-value="5">★</span>
+            </div>
+          </div>
+
+          <div class="cyber-input-group">
+            <label class="cyber-label">COMMENT (OPTIONAL)</label>
+            <textarea
+              id="comment"
+              class="cyber-textarea"
+              placeholder="Your thoughts about the movie..."
+            ></textarea>
+            <div class="cyber-bar"></div>
+          </div>
+
+          <button type="submit" class="cyber-button">[ SUBMIT ENTRY ]</button>
+          <div id="formMessage" class="cyber-message"></div>
+        </form>
+      </div>
+
+      <!-- Search Movies Tab -->
+      <div id="search-movies" class="cyber-tab-content">
+        <div class="cyber-search">
+          <div class="cyber-search-box">
+            <input
+              id="searchInput"
+              type="text"
+              class="cyber-input"
+              placeholder="Search by title..."
+            />
+            <select id="genreFilter" class="cyber-select">
+              <option value="">All Genres</option>
+            </select>
+            <button id="searchBtn" class="cyber-button-small">
+              [ SEARCH ]
+            </button>
+          </div>
+          <div id="searchResults" class="cyber-grid"></div>
+        </div>
+      </div>
+
+      <!-- Modal for Movie Details -->
+      <!-- Modal for Movie Details -->
+      <div id="movieDetailsModal" class="cyber-modal">
+        <div class="cyber-modal-content">
+          <span class="cyber-close">&times;</span>
+          <h2 id="movieDetailTitle" class="cyber-modal-title"></h2>
+          <div class="cyber-modal-meta">
+            <span id="movieDetailYear" class="cyber-chip"></span>
+            <span id="movieDetailGenre" class="cyber-chip"></span>
+            <span id="movieDetailRating" class="cyber-chip rating-chip"></span>
+          </div>
+          <div id="ratingStats"></div>
+          <div class="cyber-comments">
+            <h3 class="cyber-comments-title">[ USER COMMENTS ]</h3>
+            <form id="commentForm" class="cyber-form">
+              <textarea
+                class="cyber-textarea"
+                placeholder="Add your comment..."
+                required
+              ></textarea>
+              <div class="cyber-stars">
+                <span class="cyber-star" data-value="1">★</span>
+                <span class="cyber-star" data-value="2">★</span>
+                <span class="cyber-star" data-value="3">★</span>
+                <span class="cyber-star" data-value="4">★</span>
+                <span class="cyber-star" data-value="5">★</span>
+              </div>
+              <button type="submit" class="cyber-button">
+                [ POST COMMENT ]
+              </button>
+            </form>
+            <div id="movieComments" class="cyber-comments-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Movie Ranking -->
+      <div class="cyber-ranking">
+        <h2 class="cyber-ranking-title">[ TOP RATED ENTRIES ]</h2>
+        <div id="moviesRanking" class="cyber-ranking-list"></div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="scripts/firebase-config.js"></script>
+    <script type="module" src="scripts/genres.js"></script>
+    <script type="module" src="scripts/add-movie.js"></script>
+    <script type="module" src="scripts/search-movies.js"></script>
+    <script type="module" src="scripts/movie-details.js"></script>
+    <script type="module" src="scripts/movie-ranking.js"></script>
+  </body>
+</html>

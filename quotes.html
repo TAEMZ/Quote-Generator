@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie facts and quote generator</title>
+    <link rel="stylesheet" href="styles/quotes.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="cyber-container">
+      <!-- Header -->
+      <header class="cyber-header">
+        <h1 class="cyber-glitch" data-text="MOVIE QUOTES">MOVIE QUOTES</h1>
+        <p class="cyber-subtitle">MEMORABLE MOVIE LINES</p>
+      </header>
+
+      <!-- Quote Display Box -->
+      <div class="cyber-quote-box">
+        <div class="cyber-quote-content">
+          <div class="cyber-quote-image-container">
+            <img class="cyber-quote-image" src="" alt="Quote Image" />
+          </div>
+          <p class="cyber-quote-text">Loading a quote...</p>
+          <h4 class="cyber-quote-person"></h4>
+          <p class="cyber-quote-movie"></p>
+          <button id="newQuoteBtn" class="cyber-button-small">
+            [ NEW QUOTE ]
+          </button>
+        </div>
+      </div>
+
+      <!-- Add Quote Form -->
+      <div class="cyber-form-container">
+        <button id="toggleFormBtn" class="cyber-button">
+          [ ADD NEW QUOTE ]
+        </button>
+
+        <form id="quoteForm" class="cyber-form" style="display: none">
+          <div class="cyber-input-group">
+            <label class="cyber-label">QUOTE TEXT</label>
+            <textarea
+              id="quoteInput"
+              class="cyber-textarea"
+              required
+            ></textarea>
+          </div>
+
+          <div class="cyber-input-group">
+            <label class="cyber-label">PERSON</label>
+            <input id="personInput" type="text" class="cyber-input" required />
+          </div>
+
+          <div class="cyber-input-group">
+            <label class="cyber-label">MOVIE TITLE</label>
+            <input id="movieInput" type="text" class="cyber-input" required />
+          </div>
+
+          <div class="cyber-input-group">
+            <label class="cyber-label">MINUTE MARK</label>
+            <input
+              id="minuteInput"
+              type="number"
+              class="cyber-input"
+              required
+            />
+          </div>
+
+          <div class="cyber-input-group">
+            <label class="cyber-label">QUOTE IMAGE</label>
+            <input
+              id="imageInput"
+              type="file"
+              accept="image/*"
+              class="cyber-input"
+              required
+            />
+          </div>
+
+          <button id="submitQuote" class="cyber-button">
+            [ SUBMIT QUOTE ]
+          </button>
+          <div id="formError" class="cyber-message"></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Firebase -->
+    <script type="module" src="./scripts/app.js"></script>
+  </body>
+</html>
