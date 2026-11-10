@@ -3,161 +3,541 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Enjoy - Cyberpunk Movie Ratings</title>
-    <link rel="stylesheet" href="styles/styles.css" />
+    <title>Movie Truth | Film Quotes &amp; Dialogue</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=JetBrains+Mono:wght@500;600&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="styles/styles.css" />
   </head>
-  <body>
-    <div class="cyber-container">
-      <!-- Header -->
-      <header class="cyber-header">
-        <h1 class="cyber-glitch" data-text="Movie Truth">Movie Truth</h1>
-        <p class="cyber-subtitle">USER-GENERATED MOVIE DATABASE</p>
-        <a href="quotes.html" class="cyber-button-small" style="margin: 10px"
-          >[ VIEW QUOTES ]</a
-        >
-      </header>
-
-      <!-- Navigation Tabs -->
-      <div class="cyber-tabs">
-        <button class="cyber-tab active" data-tab="add-movie">
-          [ ADD NEW ENTRY ]
-        </button>
-        <button class="cyber-tab" data-tab="search-movies">
-          [ SEARCH ARCHIVES ]
-        </button>
-      </div>
-
-      <!-- Add Movie Tab -->
-      <div id="add-movie" class="cyber-tab-content active">
-        <form id="movieForm" class="cyber-form">
-          <div class="cyber-input-group">
-            <label class="cyber-label">MOVIE TITLE</label>
-            <input
-              id="title"
-              type="text"
-              class="cyber-input"
-              placeholder="Enter movie title..."
-              required
+  <body class="page-quotes">
+    <header class="app-navbar">
+      <div class="app-navbar-inner">
+        <a href="index.html" class="brand-link">
+          <svg
+            class="brand-mark"
+            viewBox="0 0 28 28"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M3.5 7.5C3.5 6.4 4.4 5.5 5.5 5.5H22.5C23.6 5.5 24.5 6.4 24.5 7.5V11.2C23 11.4 22 12.6 22 14C22 15.4 23 16.6 24.5 16.8V20.5C24.5 21.6 23.6 22.5 22.5 22.5H5.5C4.4 22.5 3.5 21.6 3.5 20.5V16.8C5 16.6 6 15.4 6 14C6 12.6 5 11.4 3.5 11.2V7.5Z"
+              stroke="#fbf7ee"
+              stroke-width="1.8"
+              stroke-linejoin="round"
             />
-            <div class="cyber-bar"></div>
+            <circle cx="13.5" cy="14" r="4" fill="#e85d4a" />
+            <circle cx="19" cy="10" r="1.4" fill="#e5a93c" />
+          </svg>
+          <span>Movie Truth</span>
+        </a>
+
+        <nav class="nav-pill-group" aria-label="Primary Navigation">
+          <a href="index.html" class="nav-link active" aria-current="page">Quotes</a>
+          <a href="movies.html" class="nav-link">Catalog</a>
+          <a href="movies.html#rankings-section" class="nav-link">Top Rated</a>
+        </nav>
+
+        <div class="nav-actions">
+          <a href="movies.html" class="btn btn-secondary btn-sm">
+            Browse Films
+          </a>
+          <button type="button" id="navAddQuoteBtn" class="btn btn-primary btn-sm">
+            Add Quote
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="app-container">
+      <!-- Primary Above-the-Fold Feature: Quote Screening Spotlight -->
+      <section id="quotes-section" class="hero-section" aria-label="Featured Film Quotes">
+        <div class="hero-header-row">
+          <div class="hero-copy">
+            <h1 class="hero-title">
+              Cinema dialogue,
+              <span class="ink-highlight">
+                framed in time.
+                <svg
+                  class="ink-highlight-swoosh"
+                  viewBox="0 0 240 12"
+                  preserveAspectRatio="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    class="ink-highlight-path"
+                    d="M4 9C66 3 162 2.5 236 8"
+                  />
+                </svg>
+              </span>
+            </h1>
+            <p class="hero-subtitle">
+              Draw scene-verified dialogue stamped to the exact minute mark, or explore community ratings inside the film catalog.
+            </p>
           </div>
 
-          <div class="cyber-input-group">
-            <label class="cyber-label">RELEASE YEAR</label>
-            <select id="year" class="cyber-select" required>
-              <option value="">Select year</option>
-            </select>
-            <div class="cyber-bar"></div>
-          </div>
+          <div class="hero-cta-row">
+            <button type="button" id="newQuoteBtn" class="btn btn-primary">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M21 12a9 9 0 1 1-2.64-6.36" />
+                <path d="M21 3v6h-6" />
+              </svg>
+              <span>Next Quote</span>
+            </button>
 
-          <div class="cyber-input-group">
-            <label class="cyber-label">GENRE</label>
-            <select id="genre" class="cyber-select" required>
-              <option value="">Select genre</option>
-            </select>
-            <div class="cyber-bar"></div>
+            <button
+              type="button"
+              id="toggleFormBtn"
+              class="btn btn-secondary"
+              aria-expanded="false"
+              aria-controls="quoteFormPanel"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+              <span>Submit Quote</span>
+            </button>
           </div>
+        </div>
 
-          <div class="cyber-rating">
-            <label class="cyber-label">YOUR RATING</label>
-            <div class="cyber-stars">
-              <span class="cyber-star" data-value="1">★</span>
-              <span class="cyber-star" data-value="2">★</span>
-              <span class="cyber-star" data-value="3">★</span>
-              <span class="cyber-star" data-value="4">★</span>
-              <span class="cyber-star" data-value="5">★</span>
+        <article class="quote-spotlight-card" aria-live="polite">
+          <div class="quote-media-stage">
+            <span class="ticket-notch-top" aria-hidden="true"></span>
+            <span class="ticket-notch-bottom" aria-hidden="true"></span>
+
+            <div id="quoteMediaFrame" class="quote-media-frame">
+              <img class="quote-media-img" src="" alt="Movie scene artwork" />
+            </div>
+
+            <div id="quoteIllustrationFallback" class="quote-illustration-fallback">
+              <svg
+                class="quote-illustration-svg"
+                viewBox="0 0 280 200"
+                fill="none"
+                aria-hidden="true"
+              >
+                <polygon points="154,84 256,36 256,154 154,106" fill="#e5a93c" fill-opacity="0.28" />
+                <rect x="46" y="74" width="92" height="58" rx="10" fill="#fbf7ee" stroke="#171522" stroke-width="2.5" />
+                <path d="M138 88L158 79V117L138 108V88Z" fill="#e85d4a" stroke="#171522" stroke-width="2.5" stroke-linejoin="round" />
+                <circle cx="68" cy="52" r="24" fill="#fbf7ee" stroke="#171522" stroke-width="2.5" />
+                <circle cx="68" cy="37" r="4" fill="#171522" />
+                <circle cx="68" cy="67" r="4" fill="#171522" />
+                <circle cx="53" cy="52" r="4" fill="#171522" />
+                <circle cx="83" cy="52" r="4" fill="#171522" />
+                <circle cx="68" cy="52" r="6" fill="#e85d4a" stroke="#171522" stroke-width="2" />
+                <circle cx="116" cy="56" r="19" fill="#e5a93c" stroke="#171522" stroke-width="2.5" />
+                <circle cx="116" cy="56" r="5" fill="#171522" />
+                <line x1="72" y1="132" x2="54" y2="172" stroke="#171522" stroke-width="3" stroke-linecap="round" />
+                <line x1="112" y1="132" x2="130" y2="172" stroke="#171522" stroke-width="3" stroke-linecap="round" />
+                <rect x="190" y="54" width="66" height="82" rx="8" fill="#fbf7ee" stroke="#171522" stroke-width="2.5" />
+                <line x1="204" y1="78" x2="242" y2="78" stroke="#171522" stroke-width="3" stroke-linecap="round" />
+                <line x1="204" y1="93" x2="236" y2="93" stroke="#554f68" stroke-width="2.5" stroke-linecap="round" />
+                <line x1="204" y1="108" x2="226" y2="108" stroke="#e85d4a" stroke-width="2.5" stroke-linecap="round" />
+              </svg>
             </div>
           </div>
 
-          <div class="cyber-input-group">
-            <label class="cyber-label">COMMENT (OPTIONAL)</label>
+          <div class="quote-card-body">
+            <div class="quote-dialogue-wrap">
+              <svg class="quote-mark-svg" viewBox="0 0 36 28" fill="none" aria-hidden="true">
+                <path
+                  d="M2 16C2 8.2 6.8 3.2 14.2 2L15.6 5.8C10.9 7 8.4 9.8 8 13.8H14.5V26H2V16ZM20 16C20 8.2 24.8 3.2 32.2 2L33.6 5.8C28.9 7 26.4 9.8 26 13.8H32.5V26H20V16Z"
+                  fill="#e85d4a"
+                  stroke="#171522"
+                  stroke-width="1.8"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              <blockquote class="quote-text-display">Loading quote...</blockquote>
+            </div>
+
+            <div class="quote-meta-footer">
+              <div class="quote-attribution">
+                <p class="quote-person-name"></p>
+                <p class="quote-movie-meta"></p>
+              </div>
+              <span id="quoteMinuteBadge" class="quote-minute-pill" hidden></span>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- Collapsible Add Quote Form -->
+      <section
+        id="quoteFormPanel"
+        class="quote-submit-panel"
+        hidden
+        aria-label="Submit a new quote"
+      >
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">Submit a Scene Quote</h2>
+            <p class="card-description">
+              Include the exact line, speaker, minute mark, and scene still.
+            </p>
+          </div>
+        </div>
+
+        <form id="quoteForm" class="form-stack" novalidate>
+          <div class="form-field">
+            <label for="quoteInput" class="form-label">Dialogue Line</label>
             <textarea
-              id="comment"
-              class="cyber-textarea"
-              placeholder="Your thoughts about the movie..."
+              id="quoteInput"
+              class="textarea-control"
+              placeholder="Enter the exact quote..."
+              required
             ></textarea>
-            <div class="cyber-bar"></div>
           </div>
 
-          <button type="submit" class="cyber-button">[ SUBMIT ENTRY ]</button>
-          <div id="formMessage" class="cyber-message"></div>
-        </form>
-      </div>
+          <div class="form-row-2">
+            <div class="form-field">
+              <label for="personInput" class="form-label">Speaker</label>
+              <input
+                id="personInput"
+                type="text"
+                class="input-control"
+                placeholder="e.g. Andy Dufresne"
+                required
+              />
+            </div>
 
-      <!-- Search Movies Tab -->
-      <div id="search-movies" class="cyber-tab-content">
-        <div class="cyber-search">
-          <div class="cyber-search-box">
+            <div class="form-field">
+              <label for="movieInput" class="form-label">Title</label>
+              <input
+                id="movieInput"
+                type="text"
+                class="input-control"
+                placeholder="e.g. The Shawshank Redemption"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="minuteInput" class="form-label">Minute Mark</label>
             <input
-              id="searchInput"
-              type="text"
-              class="cyber-input"
-              placeholder="Search by title..."
+              id="minuteInput"
+              type="number"
+              min="0"
+              class="input-control"
+              placeholder="e.g. 88"
+              required
             />
-            <select id="genreFilter" class="cyber-select">
-              <option value="">All Genres</option>
-            </select>
-            <button id="searchBtn" class="cyber-button-small">
-              [ SEARCH ]
+          </div>
+
+          <div class="form-field">
+            <label for="imageInput" class="form-label">Scene Frame</label>
+            <div class="file-upload-box">
+              <input
+                id="imageInput"
+                type="file"
+                accept="image/*"
+                class="file-input-hidden"
+                required
+              />
+              <svg
+                class="file-upload-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="17 8 12 3 7 8" />
+                <line x1="12" y1="3" x2="12" y2="15" />
+              </svg>
+              <span id="fileNameLabel" class="file-upload-text">
+                Choose scene screenshot
+              </span>
+              <span class="file-upload-hint">PNG, JPG, or WebP</span>
+            </div>
+            <img
+              id="quoteImagePreview"
+              class="quote-image-preview"
+              alt="Selected scene preview"
+            />
+          </div>
+
+          <div class="form-actions-row">
+            <button type="submit" id="submitQuote" class="btn btn-primary">
+              Submit Quote
+            </button>
+            <button type="button" id="cancelQuoteFormBtn" class="btn btn-secondary">
+              Cancel
             </button>
           </div>
-          <div id="searchResults" class="cyber-grid"></div>
+
+          <div id="formError" class="form-notice" role="status" aria-live="polite"></div>
+        </form>
+      </section>
+
+      <!-- Secondary Cardless Archive Links (Horizontal Borderless Row Until Hover) -->
+      <section class="features-section" aria-labelledby="featuresHeading">
+        <div class="section-header-bar">
+          <h2 id="featuresHeading" class="section-heading-sm">
+            Inside the archive
+          </h2>
+        </div>
+
+        <div class="features-grid">
+          <button
+            type="button"
+            class="feature-card"
+            data-feature-action="next-quote"
+          >
+            <div class="cinema-icon-stage">
+              <svg class="cinema-svg" viewBox="0 0 132 84" fill="none" aria-hidden="true">
+                <rect
+                  x="24"
+                  y="34"
+                  width="84"
+                  height="38"
+                  rx="6"
+                  fill="#171522"
+                  stroke="#fbf7ee"
+                  stroke-width="2"
+                />
+                <line
+                  class="anim-chalk-line"
+                  x1="38"
+                  y1="48"
+                  x2="92"
+                  y2="48"
+                  stroke="#e5a93c"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                />
+                <line
+                  class="anim-chalk-line"
+                  x1="38"
+                  y1="58"
+                  x2="78"
+                  y2="58"
+                  stroke="#e2dced"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                />
+                <g class="anim-clapper-arm">
+                  <rect
+                    x="24"
+                    y="20"
+                    width="84"
+                    height="12"
+                    rx="4"
+                    fill="#e85d4a"
+                    stroke="#fbf7ee"
+                    stroke-width="2"
+                  />
+                  <path d="M40 20L34 32M60 20L54 32M80 20L74 32M100 20L94 32" stroke="#171522" stroke-width="2.5" />
+                </g>
+                <circle cx="24" cy="32" r="3.5" fill="#fbf7ee" stroke="#171522" stroke-width="1.5" />
+              </svg>
+            </div>
+            <div class="feature-copy">
+              <h3 class="feature-card-title">Cue next dialogue</h3>
+              <p class="feature-card-desc">
+                Cycle verified scene lines stamped with exact minute marks.
+              </p>
+            </div>
+            <svg
+              class="feature-arrow"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </button>
+
+          <a
+            href="movies.html#rankings-section"
+            class="feature-card"
+          >
+            <div class="cinema-icon-stage">
+              <svg class="cinema-svg" viewBox="0 0 132 84" fill="none" aria-hidden="true">
+                <polygon
+                  class="anim-beam"
+                  points="95,47 124,25 124,69"
+                  fill="#e5a93c"
+                />
+                <rect
+                  x="32"
+                  y="42"
+                  width="52"
+                  height="26"
+                  rx="5"
+                  fill="#171522"
+                  stroke="#fbf7ee"
+                  stroke-width="2"
+                />
+                <path
+                  d="M84 47L95 43V61L84 57Z"
+                  fill="#e85d4a"
+                  stroke="#fbf7ee"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+                <g class="anim-reel-left">
+                  <circle cx="42" cy="32" r="14" fill="#252234" stroke="#fbf7ee" stroke-width="2" />
+                  <circle cx="42" cy="23" r="2.2" fill="#fbf7ee" />
+                  <circle cx="42" cy="41" r="2.2" fill="#fbf7ee" />
+                  <circle cx="33" cy="32" r="2.2" fill="#fbf7ee" />
+                  <circle cx="51" cy="32" r="2.2" fill="#fbf7ee" />
+                  <circle cx="42" cy="32" r="3" fill="#e85d4a" />
+                </g>
+                <g class="anim-reel-right">
+                  <circle cx="72" cy="28" r="11" fill="#252234" stroke="#fbf7ee" stroke-width="2" />
+                  <circle cx="72" cy="21" r="1.8" fill="#fbf7ee" />
+                  <circle cx="72" cy="35" r="1.8" fill="#fbf7ee" />
+                  <circle cx="65" cy="28" r="1.8" fill="#fbf7ee" />
+                  <circle cx="79" cy="28" r="1.8" fill="#fbf7ee" />
+                  <circle cx="72" cy="28" r="2.5" fill="#e5a93c" />
+                </g>
+              </svg>
+            </div>
+            <div class="feature-copy">
+              <h3 class="feature-card-title">Score breakdowns</h3>
+              <p class="feature-card-desc">
+                Inspect 1 to 5 star voting distributions on top ranked films.
+              </p>
+            </div>
+            <svg
+              class="feature-arrow"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
+
+          <a
+            href="movies.html#add-movie"
+            class="feature-card"
+          >
+            <div class="cinema-icon-stage">
+              <svg class="cinema-svg" viewBox="0 0 132 84" fill="none" aria-hidden="true">
+                <g class="anim-ticket">
+                  <path
+                    d="M18 27C18 24.2 20.2 22 23 22H109C111.8 22 114 24.2 114 27V36.5C110.5 36.8 108 39.6 108 43C108 46.4 110.5 49.2 114 49.5V59C114 61.8 111.8 64 109 64H23C20.2 64 18 61.8 18 59V49.5C21.5 49.2 24 46.4 24 43C24 39.6 21.5 36.8 18 36.5V27Z"
+                    fill="#fbf7ee"
+                    stroke="#171522"
+                    stroke-width="2"
+                    stroke-linejoin="round"
+                  />
+                  <line
+                    x1="78"
+                    y1="24"
+                    x2="78"
+                    y2="62"
+                    stroke="#171522"
+                    stroke-width="1.8"
+                    stroke-dasharray="4 3"
+                  />
+                  <line x1="87" y1="35" x2="103" y2="35" stroke="#171522" stroke-width="2.2" stroke-linecap="round" />
+                  <line x1="87" y1="43" x2="100" y2="43" stroke="#e85d4a" stroke-width="2.2" stroke-linecap="round" />
+                  <line x1="87" y1="51" x2="96" y2="51" stroke="#554f68" stroke-width="2.2" stroke-linecap="round" />
+                  <g class="anim-ticket-star">
+                    <circle cx="46" cy="43" r="14" fill="#fae4de" stroke="#171522" stroke-width="1.8" />
+                    <polygon
+                      points="46,34 48.8,39.7 55.1,40.6 50.5,45 51.6,51.3 46,48.3 40.4,51.3 41.5,45 36.9,40.6 43.2,39.7"
+                      fill="#e5a93c"
+                      stroke="#171522"
+                      stroke-width="1.5"
+                      stroke-linejoin="round"
+                    />
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="feature-copy">
+              <h3 class="feature-card-title">Browse &amp; rate films</h3>
+              <p class="feature-card-desc">
+                Open the indexed catalog to log scores and join discussions.
+              </p>
+            </div>
+            <svg
+              class="feature-arrow"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <div class="app-footer-inner">
+        <div class="footer-brand-col">
+          <a href="index.html" class="brand-link">
+            <svg class="brand-mark" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+              <path
+                d="M3.5 7.5C3.5 6.4 4.4 5.5 5.5 5.5H22.5C23.6 5.5 24.5 6.4 24.5 7.5V11.2C23 11.4 22 12.6 22 14C22 15.4 23 16.6 24.5 16.8V20.5C24.5 21.6 23.6 22.5 22.5 22.5H5.5C4.4 22.5 3.5 21.6 3.5 20.5V16.8C5 16.6 6 15.4 6 14C6 12.6 5 11.4 3.5 11.2V7.5Z"
+                stroke="#fbf7ee"
+                stroke-width="1.8"
+                stroke-linejoin="round"
+              />
+              <circle cx="13.5" cy="14" r="4" fill="#e85d4a" />
+              <circle cx="19" cy="10" r="1.4" fill="#e5a93c" />
+            </svg>
+            <span>Movie Truth</span>
+          </a>
+          <p class="footer-tagline">
+            Scene-verified film quotes and community score breakdowns.
+          </p>
+        </div>
+
+        <div class="footer-links-group">
+          <div>
+            <h3 class="footer-col-title">Sections</h3>
+            <ul class="footer-link-list">
+              <li><a href="index.html" class="footer-link">Quote Spotlight</a></li>
+              <li><a href="movies.html" class="footer-link">Film Catalog</a></li>
+              <li><a href="movies.html#rankings-section" class="footer-link">Highest Rated</a></li>
+              <li><a href="movies.html#add-movie" class="footer-link">Add Film</a></li>
+            </ul>
+          </div>
         </div>
       </div>
+    </footer>
 
-      <!-- Modal for Movie Details -->
-      <!-- Modal for Movie Details -->
-      <div id="movieDetailsModal" class="cyber-modal">
-        <div class="cyber-modal-content">
-          <span class="cyber-close">&times;</span>
-          <h2 id="movieDetailTitle" class="cyber-modal-title"></h2>
-          <div class="cyber-modal-meta">
-            <span id="movieDetailYear" class="cyber-chip"></span>
-            <span id="movieDetailGenre" class="cyber-chip"></span>
-            <span id="movieDetailRating" class="cyber-chip rating-chip"></span>
-          </div>
-          <div id="ratingStats"></div>
-          <div class="cyber-comments">
-            <h3 class="cyber-comments-title">[ USER COMMENTS ]</h3>
-            <form id="commentForm" class="cyber-form">
-              <textarea
-                class="cyber-textarea"
-                placeholder="Add your comment..."
-                required
-              ></textarea>
-              <div class="cyber-stars">
-                <span class="cyber-star" data-value="1">★</span>
-                <span class="cyber-star" data-value="2">★</span>
-                <span class="cyber-star" data-value="3">★</span>
-                <span class="cyber-star" data-value="4">★</span>
-                <span class="cyber-star" data-value="5">★</span>
-              </div>
-              <button type="submit" class="cyber-button">
-                [ POST COMMENT ]
-              </button>
-            </form>
-            <div id="movieComments" class="cyber-comments-list"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Movie Ranking -->
-      <div class="cyber-ranking">
-        <h2 class="cyber-ranking-title">[ TOP RATED ENTRIES ]</h2>
-        <div id="moviesRanking" class="cyber-ranking-list"></div>
-      </div>
-    </div>
-
-    <!-- Scripts -->
-    <script type="module" src="scripts/firebase-config.js"></script>
-    <script type="module" src="scripts/genres.js"></script>
-    <script type="module" src="scripts/add-movie.js"></script>
-    <script type="module" src="scripts/search-movies.js"></script>
-    <script type="module" src="scripts/movie-details.js"></script>
-    <script type="module" src="scripts/movie-ranking.js"></script>
+    <script type="module" src="./scripts/app.js"></script>
   </body>
 </html>

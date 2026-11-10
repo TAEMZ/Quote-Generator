@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Truth | Film Catalog &amp; Rankings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=JetBrains+Mono:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/styles.css" />
+  </head>
+  <body class="page-movies">
+    <header class="app-navbar">
+      <div class="app-navbar-inner">
+        <a href="index.html" class="brand-link">
+          <svg
+            class="brand-mark"
+            viewBox="0 0 28 28"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M3.5 7.5C3.5 6.4 4.4 5.5 5.5 5.5H22.5C23.6 5.5 24.5 6.4 24.5 7.5V11.2C23 11.4 22 12.6 22 14C22 15.4 23 16.6 24.5 16.8V20.5C24.5 21.6 23.6 22.5 22.5 22.5H5.5C4.4 22.5 3.5 21.6 3.5 20.5V16.8C5 16.6 6 15.4 6 14C6 12.6 5 11.4 3.5 11.2V7.5Z"
+              stroke="#fbf7ee"
+              stroke-width="1.8"
+              stroke-linejoin="round"
+            />
+            <circle cx="13.5" cy="14" r="4" fill="#e85d4a" />
+            <circle cx="19" cy="10" r="1.4" fill="#e5a93c" />
+          </svg>
+          <span>Movie Truth</span>
+        </a>
+
+        <nav class="nav-pill-group" aria-label="Primary Navigation">
+          <a href="index.html" class="nav-link">Quotes</a>
+          <a href="movies.html" class="nav-link active" aria-current="page" data-nav-view="catalog">Catalog</a>
+          <a href="#rankings-section" class="nav-link" data-nav-view="rankings">Top Rated</a>
+        </nav>
+
+        <div class="nav-actions">
+          <a href="index.html" class="btn btn-secondary btn-sm">
+            Quotes
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="app-container">
+      <!-- Dedicated Midnight Matinee Movies Header Banner -->
+      <section class="movies-hero-banner" aria-label="Film Archive Overview">
+        <div class="movies-hero-left">
+          <svg
+            class="movies-hero-badge-svg"
+            viewBox="0 0 72 72"
+            fill="none"
+            aria-hidden="true"
+          >
+            <circle cx="36" cy="36" r="32" fill="#252234" stroke="#fbf7ee" stroke-width="2" />
+            <circle cx="36" cy="17" r="4" fill="#e85d4a" stroke="#171522" stroke-width="1.5" />
+            <circle cx="36" cy="55" r="4" fill="#e85d4a" stroke="#171522" stroke-width="1.5" />
+            <circle cx="17" cy="36" r="4" fill="#e5a93c" stroke="#171522" stroke-width="1.5" />
+            <circle cx="55" cy="36" r="4" fill="#e5a93c" stroke="#171522" stroke-width="1.5" />
+            <circle cx="36" cy="36" r="11" fill="#fbf7ee" stroke="#171522" stroke-width="2" />
+            <polygon points="33,31 43,36 33,41" fill="#171522" />
+          </svg>
+
+          <div class="movies-hero-copy">
+            <h1 class="movies-hero-title">
+              Community film
+              <span class="ink-highlight">
+                catalog &amp; rankings.
+                <svg
+                  class="ink-highlight-swoosh"
+                  viewBox="0 0 240 12"
+                  preserveAspectRatio="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    class="ink-highlight-path"
+                    d="M4 9C66 3 162 2.5 236 8"
+                  />
+                </svg>
+              </span>
+            </h1>
+
+            <div class="movies-hero-meta-row">
+              <span id="catalogStatsSummary" class="movies-stats-pill">
+                Indexing archive...
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="segmented-tabs" role="tablist" aria-label="Catalog views">
+          <button
+            type="button"
+            class="tab-trigger active"
+            role="tab"
+            aria-selected="true"
+            aria-controls="search-movies"
+            data-tab="search-movies"
+          >
+            Browse Catalog
+          </button>
+          <button
+            type="button"
+            class="tab-trigger"
+            role="tab"
+            aria-selected="false"
+            aria-controls="add-movie"
+            data-tab="add-movie"
+          >
+            Add Film
+          </button>
+        </div>
+      </section>
+
+      <!-- Browse, Index & Rankings Panel -->
+      <section
+        id="search-movies"
+        class="tab-panel active"
+        role="tabpanel"
+        aria-label="Browse and Search Movies"
+      >
+        <div class="catalog-workspace section-block">
+          <div class="search-toolbar">
+            <div class="search-input-wrap">
+              <svg
+                class="search-input-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
+              <input
+                id="searchInput"
+                type="search"
+                class="input-control"
+                placeholder="Search films by title..."
+                aria-label="Search films by title"
+              />
+            </div>
+
+            <div class="search-genre-wrap select-wrapper">
+              <select id="genreFilter" class="select-control" aria-label="Filter by genre">
+                <option value="">All Genres</option>
+              </select>
+              <svg
+                class="select-chevron"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </div>
+
+            <div class="search-sort-wrap select-wrapper">
+              <select id="sortFilter" class="select-control" aria-label="Sort catalog entries">
+                <option value="highest">Highest Rated</option>
+                <option value="newest">Newest Releases</option>
+                <option value="title">Title A to Z</option>
+              </select>
+              <svg
+                class="select-chevron"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </div>
+
+            <button type="button" id="searchBtn" class="btn btn-primary">
+              Search
+            </button>
+          </div>
+
+          <div class="catalog-index-bar" aria-live="polite">
+            <span id="catalogIndexStatus" class="catalog-index-status">
+              Loading film index...
+            </span>
+            <div
+              id="catalogPagination"
+              class="catalog-pagination"
+              role="navigation"
+              aria-label="Catalog pagination"
+            ></div>
+          </div>
+
+          <div id="searchResults" class="catalog-grid">
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+          </div>
+        </div>
+
+        <section id="rankings-section" aria-labelledby="rankingsHeading">
+          <div class="section-header">
+            <h2 id="rankingsHeading" class="section-title">Highest Rated Entries</h2>
+            <p class="section-caption">Select any film to inspect voting breakdown and discussion</p>
+          </div>
+
+          <div id="moviesRanking" class="ranking-list">
+            <div class="skeleton-row"></div>
+            <div class="skeleton-row"></div>
+            <div class="skeleton-row"></div>
+            <div class="skeleton-row"></div>
+          </div>
+        </section>
+      </section>
+
+      <!-- Add Film Tab -->
+      <section
+        id="add-movie"
+        class="tab-panel surface-card"
+        role="tabpanel"
+        aria-label="Submit a New Movie Entry"
+      >
+        <div class="surface-card-inner">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Submit a Film Rating</h2>
+              <p class="card-description">
+                Add a title to the catalog with your release year, genre, score, and review.
+              </p>
+            </div>
+          </div>
+
+          <form id="movieForm" class="form-stack form-narrow" novalidate>
+            <div class="form-field">
+              <label for="title" class="form-label">Movie Title</label>
+              <input
+                id="title"
+                type="text"
+                class="input-control"
+                placeholder="e.g. Inception"
+                required
+              />
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-field">
+                <label for="year" class="form-label">Release Year</label>
+                <div class="select-wrapper">
+                  <select id="year" class="select-control" required>
+                    <option value="">Select year</option>
+                  </select>
+                  <svg
+                    class="select-chevron"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label for="genre" class="form-label">Genre</label>
+                <div class="select-wrapper">
+                  <select id="genre" class="select-control" required>
+                    <option value="">Select genre</option>
+                  </select>
+                  <svg
+                    class="select-chevron"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <span class="form-label" id="movieRatingLabel">Score</span>
+              <div
+                class="star-rating-group"
+                role="radiogroup"
+                aria-labelledby="movieRatingLabel"
+                id="movieStarGroup"
+              >
+                <button type="button" class="star-btn" data-value="1" aria-label="1 star">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 2.5l2.93 5.94 6.56.95-4.74 4.62 1.12 6.53L12 17.46l-5.87 3.08 1.12-6.53L2.51 9.39l6.56-.95L12 2.5z" />
+                  </svg>
+                </button>
+                <button type="button" class="star-btn" data-value="2" aria-label="2 stars">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 2.5l2.93 5.94 6.56.95-4.74 4.62 1.12 6.53L12 17.46l-5.87 3.08 1.12-6.53L2.51 9.39l6.56-.95L12 2.5z" />
+                  </svg>
+                </button>
+                <button type="button" class="star-btn" data-value="3" aria-label="3 stars">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 2.5l2.93 5.94 6.56.95-4.74 4.62 1.12 6.53L12 17.46l-5.87 3.08 1.12-6.53L2.51 9.39l6.56-.95L12 2.5z" />
+                  </svg>
+                </button>
+                <button type="button" class="star-btn" data-value="4" aria-label="4 stars">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 2.5l2.93 5.94 6.56.95-4.74 4.62 1.12 6.53L12 17.46l-5.87 3.08 1.12-6.53L2.51 9.39l6.56-.95L12 2.5z" />
+                  </svg>
+                </button>
+                <button type="button" class="star-btn" data-value="5" aria-label="5 stars">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 2.5l2.93 5.94 6.56.95-4.74 4.62 1.12 6.53L12 17.46l-5.87 3.08 1.12-6.53L2.51 9.39l6.56-.95L12 2.5z" />
+                  </svg>
+                </button>
+                <span class="rating-hint" id="movieRatingHint" aria-live="polite"></span>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="comment" class="form-label">
+                Review <span class="label-optional">(optional)</span>
+              </label>
+              <textarea
+                id="comment"
+                class="textarea-control"
+                placeholder="Share concise thoughts on writing, direction, or pacing..."
+              ></textarea>
+            </div>
+
+            <div class="form-actions-row">
+              <button type="submit" id="submitMovieBtn" class="btn btn-primary">
+                Submit Entry
+              </button>
+              <button type="button" id="cancelAddMovieBtn" class="btn btn-secondary">
+                Back to Catalog
+              </button>
+            </div>
+
+            <div id="formMessage" class="form-notice" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <div class="app-footer-inner">
+        <div class="footer-brand-col">
+          <a href="index.html" class="brand-link">
+            <svg class="brand-mark" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+              <path
+                d="M3.5 7.5C3.5 6.4 4.4 5.5 5.5 5.5H22.5C23.6 5.5 24.5 6.4 24.5 7.5V11.2C23 11.4 22 12.6 22 14C22 15.4 23 16.6 24.5 16.8V20.5C24.5 21.6 23.6 22.5 22.5 22.5H5.5C4.4 22.5 3.5 21.6 3.5 20.5V16.8C5 16.6 6 15.4 6 14C6 12.6 5 11.4 3.5 11.2V7.5Z"
+                stroke="#fbf7ee"
+                stroke-width="1.8"
+                stroke-linejoin="round"
+              />
+              <circle cx="13.5" cy="14" r="4" fill="#e85d4a" />
+              <circle cx="19" cy="10" r="1.4" fill="#e5a93c" />
+            </svg>
+            <span>Movie Truth</span>
+          </a>
+          <p class="footer-tagline">
+            Scene-verified film quotes and community score breakdowns.
+          </p>
+        </div>
+
+        <div class="footer-links-group">
+          <div>
+            <h3 class="footer-col-title">Sections</h3>
+            <ul class="footer-link-list">
+              <li><a href="index.html" class="footer-link">Quote Spotlight</a></li>
+              <li><a href="movies.html" class="footer-link" data-nav-view="catalog">Film Catalog</a></li>
+              <li><a href="#rankings-section" class="footer-link" data-nav-view="rankings">Highest Rated</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Movie Details Modal -->
+    <div
+      id="movieDetailsModal"
+      class="modal-backdrop"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="movieDetailTitle"
+    >
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <div>
+            <h2 id="movieDetailTitle" class="modal-title"></h2>
+            <div class="modal-meta">
+              <span id="movieDetailYear" class="meta-badge"></span>
+              <span id="movieDetailGenre" class="meta-badge"></span>
+              <span id="movieDetailRating" class="rating-pill"></span>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="modal-close-btn"
+            aria-label="Close movie details"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div id="ratingStats"></div>
+
+          <div>
+            <h3 class="modal-section-title">
+              <span>Discussion</span>
+            </h3>
+
+            <form id="commentForm" class="comment-composer" novalidate>
+              <textarea
+                id="commentTextarea"
+                class="textarea-control"
+                placeholder="Write a review or reply..."
+                aria-label="Write a review or reply"
+                required
+              ></textarea>
+
+              <div class="comment-composer-footer">
+                <div class="star-rating-group" aria-label="Optional star score">
+                  <button type="button" class="star-btn" data-value="1" aria-label="1 star">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 2.5l2.93 5.94 6.56.95-4.74 4.62 1.12 6.53L12 17.46l-5.87 3.08 1.12-6.53L2.51 9.39l6.56-.95L12 2.5z" />
+                    </svg>
+                  </button>
+                  <button type="button" class="star-btn" data-value="2" aria-label="2 stars">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 2.5l2.93 5.94 6.56.95-4.74 4.62 1.12 6.53L12 17.46l-5.87 3.08 1.12-6.53L2.51 9.39l6.56-.95L12 2.5z" />
+                    </svg>
+                  </button>
+                  <button type="button" class="star-btn" data-value="3" aria-label="3 stars">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 2.5l2.93 5.94 6.56.95-4.74 4.62 1.12 6.53L12 17.46l-5.87 3.08 1.12-6.53L2.51 9.39l6.56-.95L12 2.5z" />
+                    </svg>
+                  </button>
+                  <button type="button" class="star-btn" data-value="4" aria-label="4 stars">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 2.5l2.93 5.94 6.56.95-4.74 4.62 1.12 6.53L12 17.46l-5.87 3.08 1.12-6.53L2.51 9.39l6.56-.95L12 2.5z" />
+                    </svg>
+                  </button>
+                  <button type="button" class="star-btn" data-value="5" aria-label="5 stars">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 2.5l2.93 5.94 6.56.95-4.74 4.62 1.12 6.53L12 17.46l-5.87 3.08 1.12-6.53L2.51 9.39l6.56-.95L12 2.5z" />
+                    </svg>
+                  </button>
+                  <span class="rating-hint" id="commentRatingHint"></span>
+                </div>
+
+                <button type="submit" id="postCommentBtn" class="btn btn-primary">
+                  Post Comment
+                </button>
+              </div>
+
+              <div id="commentFormMessage" class="form-notice" role="status" aria-live="polite"></div>
+            </form>
+
+            <div id="movieComments" class="comments-thread-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="scripts/firebase-config.js"></script>
+    <script type="module" src="scripts/genres.js"></script>
+    <script type="module" src="scripts/movie-store.js"></script>
+    <script type="module" src="scripts/add-movie.js"></script>
+    <script type="module" src="scripts/search-movies.js"></script>
+    <script type="module" src="scripts/movie-details.js"></script>
+    <script type="module" src="scripts/movie-ranking.js"></script>
+  </body>
+</html>
+
